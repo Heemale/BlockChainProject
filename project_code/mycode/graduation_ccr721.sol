@@ -17,7 +17,7 @@ contract graduation_ccr721 is certificate721 {
         string _beginAndEndTime;
         string _academy;
         string _title;
-        uint _timestamp;
+        uint32 _timestamp;
     }
     mapping(uint256 => student ) public students;
 
@@ -29,8 +29,7 @@ contract graduation_ccr721 is certificate721 {
         string memory studenName,string memory studenSex,
         string memory studenBirthday,
         string memory beginAndEndTime,
-        string memory academy,string memory title,
-        uint timestamp
+        string memory academy,string memory title
         )
         public
         returns (uint256)
@@ -47,7 +46,7 @@ contract graduation_ccr721 is certificate721 {
         students[newItemId]._beginAndEndTime = beginAndEndTime;
         students[newItemId]._academy = academy;
         students[newItemId]._title = title;
-        students[newItemId]._timestamp= timestamp;
+        students[newItemId]._timestamp= uint32(block.timestamp);
 
         return newItemId;
     }
@@ -55,7 +54,7 @@ contract graduation_ccr721 is certificate721 {
     /*2.查询证书*/
     function getItem(uint256 _ItemId) public view returns (
         string memory, string memory, string memory,
-        string memory,string memory,uint
+        string memory,string memory,uint32
         ) {
         return (
         students[_ItemId]._studenName,

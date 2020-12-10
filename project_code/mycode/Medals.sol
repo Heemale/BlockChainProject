@@ -14,7 +14,7 @@ contract Medals is certificate721 {
         string _matchTpye;
         string _studentName;
         string _studenNum;
-        uint _awardTime;
+        uint32 _awardTime;
     }
     mapping(uint256 => student ) public students;
 

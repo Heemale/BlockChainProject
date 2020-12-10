@@ -32,9 +32,7 @@ contract ERC20_ccr20 is Context, IERC20 {
         _owner = msg.sender;
     }
 
-    function owner() public view returns (address) {
-        return _owner;
-    }
+
     function name() public view returns (string memory) {
         return _name;
     }
@@ -53,16 +51,18 @@ contract ERC20_ccr20 is Context, IERC20 {
     
     
         /*-------------------ccr code---------------------*/
-    function addDepartment(address _departAdd,string memory _departName) public {
-        require(administrators[msg.sender] == true || _owner == msg.sender, "ERC20: 非管理员或者所有者，您没有权限");        
+    function setDepartment(address _departAdd,string memory _departName,bool _bool) public {
+        require(administrators[msg.sender] == true || _owner == msg.sender, "ERC20: 非管理员或者所有者，您没有权限设置部门");        
         departments[_departAdd].departmentName = _departName;
-        departments[_departAdd].departmentTF = true;
-        emit SetPermissions(msg.sender,_departAdd);
+        departments[_departAdd].departmentTF = _bool;
+        emit SetPermissions(msg.sender,_departAdd,uint32(block.timestamp));
     }
-    function setAdministrators(address _AdminAdd) public {
-        require(_owner == msg.sender, "ERC20: 非管理员，您没有权限");        
-        administrators[_AdminAdd] = true;
-        emit SetPermissions(msg.sender,_AdminAdd);
+    
+    
+    function setAdministrators(address _AdminAdd,bool _bool) public {
+        require(_owner == msg.sender, "ERC20: 非所有者，您没有权限设置管理员");        
+        administrators[_AdminAdd] = _bool;
+        emit SetPermissions(msg.sender,_AdminAdd,uint32(block.timestamp));
     }
         /*-------------------ccr code---------------------*/
 
@@ -77,7 +77,7 @@ contract ERC20_ccr20 is Context, IERC20 {
             departments[sender].departmentTF == true ||
             administrators[sender] == true ||
             _owner == sender, 
-            "ERC20: 非相关部门，您没有权限");
+            "ERC20: 非相关部门，您没有权限转账");
         require(recipient != address(0), "ERC20: transfer to the zero address");
         _beforeTokenTransfer(sender, recipient, amount);
         _balances[sender] = _balances[sender].sub(amount, "ERC20: 转账金额超过余额");
@@ -94,12 +94,21 @@ contract ERC20_ccr20 is Context, IERC20 {
             departments[sender].departmentTF == true ||
             administrators[sender] == true ||
             _owner == sender, 
-            "ERC20: 非相关部门，您没有权限");       
+            "ERC20: 非相关部门，您没有权限销毁");       
         require(account != address(0), "ERC20: burn from the zero address");
         _beforeTokenTransfer(account, address(0), amount);
-        _balances[account] = _balances[account].sub(amount, "ERC20: burn amount exceeds balance");
+        _balances[account] = _balances[account].sub(amount, "ERC20: 销毁金额超过余额");
         _totalSupply = _totalSupply.sub(amount);
         emit Burn(sender,account, amount,reason);
+    }
+
+    function addTotalSupply(uint256 amount) public returns(bool){
+        require(
+            administrators[_msgSender()] == true ||
+            _owner == _msgSender(), 
+            "ERC20: 非管理员，您没有权利增加代币");          
+        _mint(_msgSender(),amount);
+        return true;
     }
 
 
@@ -108,7 +117,7 @@ contract ERC20_ccr20 is Context, IERC20 {
         _beforeTokenTransfer(address(0), account, amount);
         _totalSupply = _totalSupply.add(amount);
         _balances[account] = _balances[account].add(amount);
-        emit Transfer(address(0), account, amount,"初始化");
+        emit Add(address(0), account, amount,"增加代币");
     }
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
 }
