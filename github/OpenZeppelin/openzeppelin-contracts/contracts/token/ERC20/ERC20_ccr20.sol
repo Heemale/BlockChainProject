@@ -79,13 +79,28 @@ contract ERC20_ccr20 is Context, IERC20 {
             _owner == sender, 
             "ERC20: 非相关部门，您没有权限");
         require(recipient != address(0), "ERC20: transfer to the zero address");
-        
         _beforeTokenTransfer(sender, recipient, amount);
         _balances[sender] = _balances[sender].sub(amount, "ERC20: 转账金额超过余额");
         _balances[recipient] = _balances[recipient].add(amount);
         emit Transfer(sender, recipient, amount, reason);
     }
-
+    
+    function burn(address account, uint256 amount,string memory reason) public override virtual returns(bool){
+        _burn(_msgSender(),account,amount,reason);
+    }
+    
+    function _burn(address sender,address account, uint256 amount,string memory reason) internal virtual {
+        require(
+            departments[sender].departmentTF == true ||
+            administrators[sender] == true ||
+            _owner == sender, 
+            "ERC20: 非相关部门，您没有权限");       
+        require(account != address(0), "ERC20: burn from the zero address");
+        _beforeTokenTransfer(account, address(0), amount);
+        _balances[account] = _balances[account].sub(amount, "ERC20: burn amount exceeds balance");
+        _totalSupply = _totalSupply.sub(amount);
+        emit Burn(sender,account, amount,reason);
+    }
 
 
     function _mint(address account, uint256 amount) internal virtual {
@@ -94,13 +109,6 @@ contract ERC20_ccr20 is Context, IERC20 {
         _totalSupply = _totalSupply.add(amount);
         _balances[account] = _balances[account].add(amount);
         emit Transfer(address(0), account, amount,"初始化");
-    }
-    function _burn(address account, uint256 amount) internal virtual {
-        require(account != address(0), "ERC20: burn from the zero address");
-        _beforeTokenTransfer(account, address(0), amount);
-        _balances[account] = _balances[account].sub(amount, "ERC20: burn amount exceeds balance");
-        _totalSupply = _totalSupply.sub(amount);
-        emit Transfer(account, address(0), amount,"销毁");
     }
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
 }
