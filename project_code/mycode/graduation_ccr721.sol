@@ -10,7 +10,7 @@ contract graduation_ccr721 is certificate721 {
     Counters.Counter private _tokenIds;
     
     /*ccr:学生属性和tokenID绑定*/
-    struct student {
+    struct certificate {
         string _studenName;
         string _studenSex;
         string _studenBirthday;
@@ -19,7 +19,8 @@ contract graduation_ccr721 is certificate721 {
         string _title;
         uint32 _timestamp;
     }
-    mapping(uint256 => student ) public students;
+
+    mapping(uint256 => certificate ) public certificates;
 
     constructor() public certificate721("清华大学", "硕士研究生") {}
 
@@ -31,7 +32,7 @@ contract graduation_ccr721 is certificate721 {
         string memory beginAndEndTime,
         string memory academy,string memory title
         )
-        public
+        public onlyHost
         returns (uint256)
     {
         _tokenIds.increment();
@@ -40,14 +41,14 @@ contract graduation_ccr721 is certificate721 {
         _mint(player, newItemId);
         _setTokenURI(newItemId, tokenURI);
         
-        students[newItemId]._studenName = studenName;
-        students[newItemId]._studenSex = studenSex;
-        students[newItemId]._studenBirthday = studenBirthday;
-        students[newItemId]._beginAndEndTime = beginAndEndTime;
-        students[newItemId]._academy = academy;
-        students[newItemId]._title = title;
-        students[newItemId]._timestamp= uint32(block.timestamp);
-
+        certificates[newItemId]._studenName = studenName;
+        certificates[newItemId]._studenSex = studenSex;
+        certificates[newItemId]._studenBirthday = studenBirthday;
+        certificates[newItemId]._beginAndEndTime = beginAndEndTime;
+        certificates[newItemId]._academy = academy;
+        certificates[newItemId]._title = title;
+        certificates[newItemId]._timestamp= uint32(block.timestamp);
+        emit Add(_msgSender(),player,newItemId,uint32(block.timestamp));
         return newItemId;
     }
     
@@ -57,25 +58,25 @@ contract graduation_ccr721 is certificate721 {
         string memory,string memory,uint32
         ) {
         return (
-        students[_ItemId]._studenName,
-        students[_ItemId]._studenSex,
-        students[_ItemId]._studenBirthday,
-        students[_ItemId]._beginAndEndTime,
-        students[_ItemId]._academy,
-        students[_ItemId]._timestamp);
+        certificates[_ItemId]._studenName,
+        certificates[_ItemId]._studenSex,
+        certificates[_ItemId]._studenBirthday,
+        certificates[_ItemId]._beginAndEndTime,
+        certificates[_ItemId]._academy,
+        certificates[_ItemId]._timestamp);
     }
     
     /*3.销毁证书*/
     function burn(uint256 tokenId) public returns(bool _bool) {
         _burn(tokenId);
-        
-        students[tokenId]._studenName = "";
-        students[tokenId]._studenSex = "";
-        students[tokenId]._studenBirthday = "";
-        students[tokenId]._beginAndEndTime = "";
-        students[tokenId]._academy = "";
-        students[tokenId]._timestamp = 0;
-        
+        require(_isOwner(_msgSender(), tokenId), "ERC721: 证书只能被所有者销毁");        
+        certificates[tokenId]._studenName = "";
+        certificates[tokenId]._studenSex = "";
+        certificates[tokenId]._studenBirthday = "";
+        certificates[tokenId]._beginAndEndTime = "";
+        certificates[tokenId]._academy = "";
+        certificates[tokenId]._timestamp = 0;
+        emit Burn(_msgSender(),tokenId,uint32(block.timestamp));        
         return _bool;
     }
     
