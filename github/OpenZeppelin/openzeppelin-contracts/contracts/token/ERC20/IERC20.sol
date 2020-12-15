@@ -12,6 +12,5 @@ interface IERC20 {
     event Burn(address indexed sender,address indexed from,uint256 value,string reason);
     event Add(address indexed from, address indexed to, uint256 value,string reason);
         
-    event Approval(address indexed owner, address indexed spender, uint256 value);
     event SetPermissions(address indexed setFrom,address indexed setTo,uint32 setTime);
 }
