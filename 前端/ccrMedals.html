@@ -1,13 +1,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>毕业证书</title>
+        <title>获奖令牌</title>
         <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="js/web3.min.js"></script>
     </head>
 
     <body>
-        <h3>university</h3>
+        <h3>英语国才杯</h3>
         <button class="enableEthereumButton">Enable Ethereum</button>
         <h2>Account: <span class="showAccount"></span></h2>
         <h2>Balance: <span class="ShowThisAccountBalance"></span></h2>
@@ -19,40 +19,45 @@
         <p><button class="getSymbol">getSymbol</button><span class="showSymbol"></span><br></p>
 
         <!--2.添加代币、部门、管理员-->
-
+        <hr>
         <p>
-            <input type="text" value="" id="addPlayer">
-            <input type="text" value="" id="addTokenURI">
-            <input type="text" value="" id="addmatchTpye">
-            <input type="text" value="" id="addstudentName">
-            <input type="text" value="" id="addstudenNum">
+            获奖学生地址:<br>
+            <input type="text" value="" id="addPlayer" placeholder="请输入获奖学生地址"><br>
+            奖牌（年份-种类）：<br>
+            <input type="text" value="" id="addTokenURI" placeholder="请输入奖牌（年份-种类）"><br>
+            获奖类型：<br>
+            <input type="text" value="" id="addmatchTpye" placeholder="请输入获奖类型"><br>
+            学生姓名：<br>
+            <input type="text" value="" id="addstudentName" placeholder="请输入学生姓名"><br>
+            学生学号:<br>
+            <input type="text" value="" id="addstudenNum" placeholder="请输入学生学号"><br>
             <button onclick="addItem()">addItem</button>
             <span class="showadd"></span>
-        </p>
+        </p><hr>
 
         <p>
-            <input type="text" value="" id="getItem">
+            <input type="text" value="" id="getItem" placeholder="请输入奖牌编号">
             <button onclick="getItem()">getItem</button>
             <span class="showItem"></span>
         </p>
 
         <p>
-            <input type="text" value="" id="burn">
+            <input type="text" value="" id="burn" placeholder="请输入奖牌编号">
             <button onclick="burn()">burn</button>
             <span class="showburn"></span>
         </p>
 
         <p>
-            <input type="text" value="" id="ownerOf">
+            <input type="text" value="" id="ownerOf" placeholder="请输入奖牌编号">
             <button onclick="ownerOf()">ownerOf</button>
             <span class="showOwnerOf"></span>
-        </p>
+        </p><hr>
 
-<!--        <p><button class="getEventTansfer">getEventTansfer</button><span class="showEventTansfer"></span><br><hr></p>-->
-<!--        <p><button class="getEventBurn">getEventBurn</button><span class="showEventBurn"></span><br><hr></p>-->
+        <p><button class="getEventAdd">getEventAdd</button><span class="showEventAdd"></span><hr></p>
+        <p><button class="getEventBurn">getEventBurn</button><span class="showEventBurn"></span><hr></p>
 
     </body>
-    <script type="text/javascript" src="certificate.js"></script>
+    <script type="text/javascript" src="ccrMedals.js"></script>
     <script>
 
     </script>

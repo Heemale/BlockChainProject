@@ -375,7 +375,7 @@ const contractABI = [
 		"type": "function"
 	}
 ];
-var contract = new web3.eth.Contract(contractABI, "0xba9A45D879BC52fCe8b5d4522FEdf06cc13c0599");
+var contract = new web3.eth.Contract(contractABI, "0x6cA1b41D569aa949894e717386eB244e9d01Ba4e");
 
 
 /*1.constant*/
@@ -409,15 +409,16 @@ function addItem() {
 	let matchTpye=document.getElementById('addmatchTpye').value;
 	let studentName=document.getElementById('addstudentName').value;
 	let studenNum=document.getElementById('addstudenNum').value;
-	// document.getElementById("addPlayer").value="";
-	// document.getElementById("addTokenURI").value="";
-	// document.getElementById("addmatchTpye").value="";
-	// document.getElementById("addstudentName").value="";
-	// document.getElementById("addstudenNum").value="";
+
 	console.log("获奖学生数据为："+player,tokenURI,matchTpye,studentName,studenNum);
 	contract.methods.addItem(player,tokenURI,matchTpye,studentName,studenNum).send({from:accounts[0]}).then(
 		function (result) {
 			console.log("add_result:",result);
+			document.getElementById("addPlayer").value="";
+			document.getElementById("addTokenURI").value="";
+			document.getElementById("addmatchTpye").value="";
+			document.getElementById("addstudentName").value="";
+			document.getElementById("addstudenNum").value="";
 			$('.showadd').html(result.status)
 		}
 	);
@@ -461,10 +462,10 @@ function burn() {
 
 				contract.methods.ownerOf(resItemId).call({from: accounts[0]}).then(
 					function (result3) {
-						if (result3  == accounts[0]){
+						if (result3.toLowerCase()  == accounts[0]){
 							contract.methods.burn(resItemId).send({from: accounts[0]}).then(
 								function (result) {
-									console.log(result);
+									console.log("burn_result:",result);
 									$('.showburn').html(result.status)
 								}
 							);
@@ -477,8 +478,6 @@ function burn() {
 				);
 
 			}
-
-
 
 		});
 
@@ -497,7 +496,7 @@ function ownerOf() {
 
 				contract.methods.ownerOf(resItemId).call({from: accounts[0]}).then(
 					function (result) {
-						console.log(result);
+						console.log("所有者:",result);
 						$('.showOwnerOf').html(result)
 					}
 				);
@@ -506,6 +505,85 @@ function ownerOf() {
 		});
 
 
+}
 
 
+$(".getEventAdd").click(function () {
+	contract.getPastEvents('Add', {
+		fromBlock: 0,
+		toBlock: 'latest'
+	}, function(error, events){
+		console.log("-------------------------------------");
+		$('.showEventAdd').html("");
+		events.forEach(element => {
+			/*
+            * 转成JSON格式字符串，再将字符串转化json对象：
+            * */
+			var jsonData = JSON.stringify(element.returnValues);
+			var json = JSON.parse(jsonData);
+			var json = eval("(" + jsonData + ")");
+			var json = (new Function("return " + jsonData))();
+
+			console.log("Event add：",json);
+			$('.showEventAdd').prepend(
+				"<p>"
+				+ "from：" + json.from.slice(0,6) + "..." + json.from.substring(38)
+				+ " to：" + json.to.slice(0,6) + "..." + json.to.substring(38)
+				+ " tokenId：" + json.tokenId
+				+ "  时间戳：" + timeConverter(json.addTime,1) + "</p>"
+			);
+		});
+	});
+});
+
+$(".getEventBurn").click(function () {
+	contract.getPastEvents('Burn', {
+		fromBlock: 0,
+		toBlock: 'latest'
+	}, function(error, events){
+		console.log("-------------------------------------");
+		$('.showEventBurn').html("");
+		events.forEach(element => {
+			/*
+            * 转成JSON格式字符串，再将字符串转化json对象：
+            * */
+			var jsonData = JSON.stringify(element.returnValues);
+			var json = JSON.parse(jsonData);
+			var json = eval("(" + jsonData + ")");
+			var json = (new Function("return " + jsonData))();
+
+			console.log("Event Burn：",json);
+			$('.showEventBurn').prepend(
+				"<p>"
+				+ " 操作人：" + json.from.slice(0,6) + "..." + json.from.substring(38)
+				+ " 令牌Id：" + json.tokenId
+				+ " 销毁时间：" +timeConverter(json.burnTime,1) + "</p>"
+			);
+		});
+	});
+});
+
+
+function timeConverter(timestamp,num){//num:0 YYYY-MM-DD  num:1  YYYY-MM-DD hh:mm:ss // timestamp:时间戳
+	timestamp = timestamp+'';
+	timestamp = timestamp.length==10?timestamp*1000:timestamp;
+	//10位的时间戳要*1000，时间戳是ms？？
+	var date = new Date(timestamp);
+	var y = date.getFullYear();
+	var m = date.getMonth() + 1;
+	//如果月份<10前面+0，否则直接打印m本身
+	m = m < 10 ? ('0' + m) : m;
+	var d = date.getDate();
+	d = d < 10 ? ('0' + d) : d;
+	var h = date.getHours();
+	h = h < 10 ? ('0' + h) : h;
+	var minute = date.getMinutes();
+	var second = date.getSeconds();
+	minute = minute < 10 ? ('0' + minute) : minute;
+	second = second < 10 ? ('0' + second) : second;
+	if(num==0){
+		return y + '-' + m + '-' + d;
+	}else{
+		return y + '-' + m + '-' + d +' '+ h +':'+ minute +':' + second;
+	}
 }
