@@ -48,7 +48,7 @@ contract graduation_ccr721 is certificate721 {
         certificates[newItemId]._academy = academy;
         certificates[newItemId]._title = title;
         certificates[newItemId]._timestamp= uint32(block.timestamp);
-        emit Add(_msgSender(),player,newItemId,uint32(block.timestamp));
+
         return newItemId;
     }
     
@@ -76,7 +76,7 @@ contract graduation_ccr721 is certificate721 {
         certificates[tokenId]._beginAndEndTime = "";
         certificates[tokenId]._academy = "";
         certificates[tokenId]._timestamp = 0;
-        emit Burn(_msgSender(),tokenId,uint32(block.timestamp));        
+      
         return _bool;
     }
     

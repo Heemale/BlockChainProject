@@ -38,7 +38,7 @@ contract ccrMedals is certificate721 {
         medals[newItemId]._studentName = studentName;
         medals[newItemId]._studenNum = studenNum;
         medals[newItemId]._awardTime = uint32(block.timestamp);
-        emit Add(_msgSender(),player,newItemId,uint32(block.timestamp));
+
         return newItemId;
     }
     
@@ -61,7 +61,7 @@ contract ccrMedals is certificate721 {
         medals[tokenId]._studentName = "";
         medals[tokenId]._studenNum = "";
         medals[tokenId]._awardTime = 0;
-        emit Burn(_msgSender(),tokenId,uint32(block.timestamp));
+
         return _bool;
     }
     
