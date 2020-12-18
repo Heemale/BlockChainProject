@@ -66,6 +66,79 @@ const contractABI = [
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "player",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "tokenURI",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "studenSex",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "studenBirthday",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "beginTime",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "endTime",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "academy",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "title",
+				"type": "string"
+			}
+		],
+		"name": "addItem",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "burn",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "_bool",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -94,45 +167,6 @@ const contractABI = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "player",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "tokenURI",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "matchTpye",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "studentName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "studenNum",
-				"type": "string"
-			}
-		],
-		"name": "addItem",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "owner",
 				"type": "address"
 			}
@@ -152,19 +186,49 @@ const contractABI = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "tokenId",
+				"name": "",
 				"type": "uint256"
 			}
 		],
-		"name": "burn",
+		"name": "certificates",
 		"outputs": [
 			{
-				"internalType": "bool",
-				"name": "_bool",
-				"type": "bool"
+				"internalType": "string",
+				"name": "_studenSex",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_studenBirthday",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_beginTime",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_endTime",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_academy",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_title",
+				"type": "string"
+			},
+			{
+				"internalType": "uint32",
+				"name": "_timestamp",
+				"type": "uint32"
 			}
 		],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -193,42 +257,18 @@ const contractABI = [
 				"type": "string"
 			},
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "medals",
-		"outputs": [
-			{
 				"internalType": "string",
-				"name": "_matchTpye",
+				"name": "",
 				"type": "string"
 			},
 			{
 				"internalType": "string",
-				"name": "_studentName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_studenNum",
+				"name": "",
 				"type": "string"
 			},
 			{
 				"internalType": "uint32",
-				"name": "_awardTime",
+				"name": "",
 				"type": "uint32"
 			}
 		],
@@ -375,7 +415,7 @@ const contractABI = [
 		"type": "function"
 	}
 ];
-var contract = new web3.eth.Contract(contractABI, "0xFaD1191D55B0272dadfcEE69E2d8b37735BC77Cc");
+var contract = new web3.eth.Contract(contractABI, "0x399E56A93D1B154Fe264D0CbD48Cf76F82465600");
 
 
 /*1.constant*/
@@ -409,28 +449,37 @@ document.getElementById("loading2").style.display="none";//隐藏
 function addItem() {
 	let player=document.getElementById('addPlayer').value;
 	let tokenURI=document.getElementById('addTokenURI').value;
-	let matchTpye=document.getElementById('addmatchTpye').value;
-	let studentName=document.getElementById('addstudentName').value;
-	let studenNum=document.getElementById('addstudenNum').value;
-
-	console.log("获奖学生数据为："+player,tokenURI,matchTpye,studentName,studenNum);
+	let studenSex=document.getElementById('studenSex').value;
+	let studenBirthday=document.getElementById('studenBirthday').value;
+	let beginTime=document.getElementById('beginTime').value;
+	let endTime=document.getElementById('endTime').value;
+	let academy=document.getElementById('academy').value;
+	let title=document.getElementById('title').value;
+	console.log("学生证书数据为："+player,tokenURI,studenSex,studenBirthday,beginTime,endTime,academy,title);
 	/* 逮虾户 显示 */
 	document.getElementById("loading").style.display="";
+	$('.loading_bgm').html("<embed src='studio/_DejaVu.m4a' hidden='true' loop='loop'>");
 
-	contract.methods.addItem(player,tokenURI,matchTpye,studentName,studenNum).send({from:accounts[0]}).then(
+	contract.methods.addItem(player,tokenURI,studenSex,studenBirthday,beginTime,endTime,academy,title).send({from:accounts[0]}).then(
+
 		function (result) {
 			console.log("add_result:",result);
 			document.getElementById("addPlayer").value="";
 			document.getElementById("addTokenURI").value="";
-			document.getElementById("addmatchTpye").value="";
-			document.getElementById("addstudentName").value="";
-			document.getElementById("addstudenNum").value="";
+			document.getElementById("studenSex").value="";
+			document.getElementById("studenBirthday").value="";
+			document.getElementById("beginTime").value="";
+			document.getElementById("endTime").value="";
+			document.getElementById("academy").value="";
+			document.getElementById("title").value="";
 			$('.showadd').html(result.status);
 
 			/* 逮虾户 隐藏 */
 			document.getElementById("loading").style.display="none";//隐藏
+			$('.loading_bgm').html("");
 		}
-	);
+
+	)
 }
 
 function getItem() {
@@ -441,17 +490,20 @@ function getItem() {
 		function (result2) {
 
 			if (result2[3] == 0){
-				$('.showItem').html("<p>"+ "令牌不存在" + "</p>")
+				$('.showItem').html("<p>"+ "证书不存在" + "</p>")
 			} else {
 
 	contract.methods.tokenURI(resItemId).call({from: accounts[0]}).then(
 		function (result) {
 			$('.showItem').html("<p>"
-				+ "头衔：" +result + " "
-				+ "比赛种类：" +result2[0] +" "
-				+ "学生姓名：" + result2[1] +" "
-				+"学生学号：" + result2[2] +" "
-				+"时间戳：" + result2[3] + "</p>")
+				+ "学生名字：" +result + " "
+				+ "学生性别：" +result2[0] +" "
+				+ "出生时间：" + result2[1] +" "
+				+"入学时间：" + result2[2] +" "
+				+"毕业时间：" + result2[3] + " "
+				+"院系：" + result2[4] + " "
+				+"时间戳：" + result2[5] + " "
+				+"</p>")
 					});
 			}
 
@@ -475,6 +527,7 @@ function burn() {
 
 							/* 逮虾户 显示 */
 							document.getElementById("loading2").style.display="";
+							$('.loading_bgm2').html("<embed src='studio/_DejaVu.m4a' hidden='true' loop='loop'>");
 
 							contract.methods.burn(resItemId).send({from: accounts[0]}).then(
 								function (result) {
@@ -482,6 +535,7 @@ function burn() {
 									$('.showburn').html(result.status);
 									/* 逮虾户 隐藏 */
 									document.getElementById("loading2").style.display="none";
+									$('.loading_bgm2').html("");
 								}
 							);
 						} else {
