@@ -10,11 +10,12 @@ contract graduation_ccr721 is certificate721 {
     Counters.Counter private _tokenIds;
     
     /*ccr:学生属性和tokenID绑定*/
+    /* URI信息：Student's name */
     struct certificate {
-        string _studenName;
         string _studenSex;
         string _studenBirthday;
-        string _beginAndEndTime;
+        string _beginTime;
+        string _endTime;
         string _academy;
         string _title;
         uint32 _timestamp;
@@ -27,9 +28,10 @@ contract graduation_ccr721 is certificate721 {
     /*1.新增证书*/
     function addItem(
         address player, string memory tokenURI,
-        string memory studenName,string memory studenSex,
+        string memory studenSex,
         string memory studenBirthday,
-        string memory beginAndEndTime,
+        string memory beginTime,
+        string memory endTime,
         string memory academy,string memory title
         )
         public onlyHost
@@ -41,10 +43,10 @@ contract graduation_ccr721 is certificate721 {
         _mint(player, newItemId);
         _setTokenURI(newItemId, tokenURI);
         
-        certificates[newItemId]._studenName = studenName;
         certificates[newItemId]._studenSex = studenSex;
         certificates[newItemId]._studenBirthday = studenBirthday;
-        certificates[newItemId]._beginAndEndTime = beginAndEndTime;
+        certificates[newItemId]._beginTime = beginTime;
+        certificates[newItemId]._endTime = endTime;
         certificates[newItemId]._academy = academy;
         certificates[newItemId]._title = title;
         certificates[newItemId]._timestamp= uint32(block.timestamp);
@@ -54,14 +56,14 @@ contract graduation_ccr721 is certificate721 {
     
     /*2.查询证书*/
     function getItem(uint256 _ItemId) public view returns (
-        string memory, string memory, string memory,
+        string memory, string memory,string memory,
         string memory,string memory,uint32
         ) {
         return (
-        certificates[_ItemId]._studenName,
         certificates[_ItemId]._studenSex,
         certificates[_ItemId]._studenBirthday,
-        certificates[_ItemId]._beginAndEndTime,
+        certificates[_ItemId]._beginTime,
+        certificates[_ItemId]._endTime,
         certificates[_ItemId]._academy,
         certificates[_ItemId]._timestamp);
     }
@@ -70,10 +72,10 @@ contract graduation_ccr721 is certificate721 {
     function burn(uint256 tokenId) public returns(bool _bool) {
         _burn(tokenId);
         require(_isOwner(_msgSender(), tokenId), "ERC721: 证书只能被所有者销毁");        
-        certificates[tokenId]._studenName = "";
         certificates[tokenId]._studenSex = "";
         certificates[tokenId]._studenBirthday = "";
-        certificates[tokenId]._beginAndEndTime = "";
+        certificates[tokenId]._beginTime = "";
+        certificates[tokenId]._endTime = "";        
         certificates[tokenId]._academy = "";
         certificates[tokenId]._timestamp = 0;
       

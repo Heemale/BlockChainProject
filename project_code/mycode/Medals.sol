@@ -10,6 +10,7 @@ contract ccrMedals is certificate721 {
     Counters.Counter private _tokenIds;
     
     /*ccr:获奖学生属性和tokenID绑定*/
+    /* URI信息：年份-排名（如：2019-冠军） */
     struct medal {
         string _matchTpye;
         string _studentName;

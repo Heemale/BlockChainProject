@@ -103,6 +103,7 @@ contract certificate721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enu
     function tokenOfOwnerByIndex(address owner, uint256 index) public view override returns (uint256) {
         return _holderTokens[owner].at(index);
     }
+    /* 删除了当前代币，此代币位置被最后一个替代 */
     function tokenByIndex(uint256 index) public view override returns (uint256) {
         (uint256 tokenId, ) = _tokenOwners.at(index);
         return tokenId;
