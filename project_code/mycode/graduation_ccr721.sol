@@ -70,8 +70,8 @@ contract graduation_ccr721 is certificate721 {
     
     /*3.销毁证书*/
     function burn(uint256 tokenId) public returns(bool _bool) {
+        require(_isOwner(_msgSender(), tokenId), "ERC721: 证书只能被所有者销毁");
         _burn(tokenId);
-        require(_isOwner(_msgSender(), tokenId), "ERC721: 证书只能被所有者销毁");        
         certificates[tokenId]._studenSex = "";
         certificates[tokenId]._studenBirthday = "";
         certificates[tokenId]._beginTime = "";
