@@ -331,7 +331,7 @@
 
 ④.学分变动
 
-![学分变动](https://i.loli.net/2020/12/26/vYXliPDUfmwcjn6.png)
+![学分变动](https://i.loli.net/2020/12/26/wiYdoWMfNO6cbKh.png)
 
 ⑤.学分变动记录
 
