@@ -55,14 +55,14 @@ contract ERC20_ccr20 is Context, IERC20 {
         require(administrators[msg.sender] == true || _owner == msg.sender, "ERC20: 非管理员或者所有者，您没有权限设置部门");        
         departments[_departAdd].departmentName = _departName;
         departments[_departAdd].departmentTF = _bool;
-        emit SetPermissions(msg.sender,_departAdd,uint32(block.timestamp));
+        emit SetDepartment(msg.sender,_departAdd,_bool,uint32(block.timestamp));
     }
     
     
     function setAdministrators(address _AdminAdd,bool _bool) public {
         require(_owner == msg.sender, "ERC20: 非所有者，您没有权限设置管理员");        
         administrators[_AdminAdd] = _bool;
-        emit SetPermissions(msg.sender,_AdminAdd,uint32(block.timestamp));
+        emit SetAdministrators(msg.sender,_AdminAdd,_bool,uint32(block.timestamp));
     }
         /*-------------------ccr code---------------------*/
 
