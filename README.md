@@ -54,9 +54,9 @@
 
 [5代码](https://github.com/Heemale/BlockChainProject#5%E4%BB%A3%E7%A0%81)
 
-[5.1ERC721类不可替代性代币](https://github.com/Heemale/BlockChainProject#erc721%E7%B1%BB%E4%B8%8D%E5%8F%AF%E6%9B%BF%E4%BB%A3%E6%80%A7%E4%BB%A3%E5%B8%81)
+​	[5.1ERC721类不可替代性代币](https://github.com/Heemale/BlockChainProject#erc721%E7%B1%BB%E4%B8%8D%E5%8F%AF%E6%9B%BF%E4%BB%A3%E6%80%A7%E4%BB%A3%E5%B8%81)
 
-[5.2ERC20类可替代性代币](https://github.com/Heemale/BlockChainProject#erc20%E7%B1%BB%E5%8F%AF%E6%9B%BF%E4%BB%A3%E6%80%A7%E4%BB%A3%E5%B8%81)
+​	[5.2ERC20类可替代性代币](https://github.com/Heemale/BlockChainProject#erc20%E7%B1%BB%E5%8F%AF%E6%9B%BF%E4%BB%A3%E6%80%A7%E4%BB%A3%E5%B8%81)
 
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
@@ -314,7 +314,9 @@
 
 2.发证
 
-​		实现学生区块链毕业证书的发放。学生完成毕业论文达到毕业条件时，由学校发放区块链毕业证书。具体流程如下：
+​		实现学生区块链毕业证书的发放。学生完成毕业论文达到毕业条件时，由学校发放区块链毕业证书。
+
+具体流程如下：
 
 （1）学校为学生申请一个唯一标识（证书ID）
 
@@ -324,7 +326,7 @@
 
 雇主通过区块链对学生证书的真伪性进行确认。
 
-流程如下：
+具体流程如下：
 
 （1）学生向雇主提供指向的数字文凭的链接。
 
