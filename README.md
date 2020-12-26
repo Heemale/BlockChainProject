@@ -767,7 +767,7 @@ c.在智能合约编码中尽可能少地暴露被外部调用的接口。建议
 
 普通用户不能进行授权操作，只有是合约所有人或者管理员才能设置相关部门，授权操作将被记录到事件当中
 
-```
+```solidity
     function setDepartment(address _departAdd,string memory _departName,bool _bool) public {
         require(administrators[msg.sender] == true || _owner == msg.sender, "ERC20: 非管理员或者所有者，您没有权限设置部门");        
         departments[_departAdd].departmentName = _departName;
@@ -787,7 +787,7 @@ c.在智能合约编码中尽可能少地暴露被外部调用的接口。建议
 
 普通用户不能进行转账和销毁操作，只有是合约所有人、管理员或者是相关部门才能设置进行转账和销毁来进行加分或者扣分，转账或者销毁的操作将被记录到事件当中
 
-```
+```solidity
     function _transfer(address sender, address recipient, uint256 amount, string memory reason) internal virtual {
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(
@@ -821,7 +821,7 @@ c.在智能合约编码中尽可能少地暴露被外部调用的接口。建议
 
 普通用户不能进行增发代币操作，只有是合约所有人才能设置管理员，授权操作将被记录到事件当中
 
-```
+```solidity
     function addTotalSupply(uint256 amount) public returns(bool){
         require(
             administrators[_msgSender()] == true ||
