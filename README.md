@@ -52,6 +52,12 @@
 
 ​	[4.3安全模块](https://github.com/Heemale/BlockChainProject#43%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97)
 
+[5代码](https://github.com/Heemale/BlockChainProject#5%E4%BB%A3%E7%A0%81)
+
+[5.1ERC721类不可替代性代币](https://github.com/Heemale/BlockChainProject#erc721%E7%B1%BB%E4%B8%8D%E5%8F%AF%E6%9B%BF%E4%BB%A3%E6%80%A7%E4%BB%A3%E5%B8%81)
+
+[5.2ERC20类可替代性代币](https://github.com/Heemale/BlockChainProject#erc20%E7%B1%BB%E5%8F%AF%E6%9B%BF%E4%BB%A3%E6%80%A7%E4%BB%A3%E5%B8%81)
+
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
 #### 前言
@@ -596,7 +602,7 @@ c.在智能合约编码中尽可能少地暴露被外部调用的接口。建议
 
 ### 5.代码
 
-#### ERC721类不可替代性代币
+#### 5.1ERC721类不可替代性代币
 
 不可替代性奖牌：
 
@@ -740,7 +746,7 @@ c.在智能合约编码中尽可能少地暴露被外部调用的接口。建议
 
 -------
 
-#### ERC20类可替代性代币
+#### 5.2ERC20类可替代性代币
 
 1.部署合约的人为合约所有者，管理员和相关部门的数据结构均是映射类型
 
