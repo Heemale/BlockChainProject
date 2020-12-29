@@ -54,9 +54,9 @@
 
 [5代码](https://github.com/Heemale/BlockChainProject#5%E4%BB%A3%E7%A0%81)
 
-​	[5.1ERC721类不可替代性代币](https://github.com/Heemale/BlockChainProject#erc721%E7%B1%BB%E4%B8%8D%E5%8F%AF%E6%9B%BF%E4%BB%A3%E6%80%A7%E4%BB%A3%E5%B8%81)
+​	[5.1ERC721类不可替代性代币](https://github.com/Heemale/BlockChainProject#51erc721%E7%B1%BB%E4%B8%8D%E5%8F%AF%E6%9B%BF%E4%BB%A3%E6%80%A7%E4%BB%A3%E5%B8%81)
 
-​	[5.2ERC20类可替代性代币](https://github.com/Heemale/BlockChainProject#erc20%E7%B1%BB%E5%8F%AF%E6%9B%BF%E4%BB%A3%E6%80%A7%E4%BB%A3%E5%B8%81)
+​	[5.2ERC20类可替代性代币](https://github.com/Heemale/BlockChainProject#52erc20%E7%B1%BB%E5%8F%AF%E6%9B%BF%E4%BB%A3%E6%80%A7%E4%BB%A3%E5%B8%81)
 
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
