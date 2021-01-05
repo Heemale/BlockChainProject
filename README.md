@@ -58,7 +58,7 @@
 
 ​	[5.2ERC20类可替代性代币](https://github.com/Heemale/BlockChainProject#52erc20%E7%B1%BB%E5%8F%AF%E6%9B%BF%E4%BB%A3%E6%80%A7%E4%BB%A3%E5%B8%81)
 
-6[前端展示](https://github.com/Heemale/BlockChainProject#6%E5%89%8D%E7%AB%AF%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA)
+[6前端展示](https://github.com/Heemale/BlockChainProject#6%E5%89%8D%E7%AB%AF%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA)
 
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
