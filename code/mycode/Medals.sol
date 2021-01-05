@@ -45,8 +45,7 @@ contract ccrMedals is certificate721 {
     
     /*2.查询奖牌*/
     function getItem(uint256 _ItemId) public view returns (
-        string memory, string memory,string memory, uint
-        ) {
+        string memory, string memory,string memory, uint) {
         return (
         medals[_ItemId]._matchTpye,
         medals[_ItemId]._studentName,

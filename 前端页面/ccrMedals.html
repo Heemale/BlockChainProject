@@ -4,19 +4,20 @@
         <title>获奖令牌</title>
         <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="js/web3.min.js"></script>
+        <link rel="stylesheet" href="css/style.css" />
     </head>
 
     <body>
         <h3>英语国才杯</h3>
-        <button class="enableEthereumButton">Enable Ethereum</button>
-        <h2>Account: <span class="showAccount"></span></h2>
-        <h2>Balance: <span class="ShowThisAccountBalance"></span></h2>
+        <button class="enableEthereumButton">连接以太坊</button>
+        <h2>当前账户: <span class="showAccount"></span></h2>
+        <h2>账户拥有的奖牌数量: <span class="ShowThisAccountBalance"></span></h2>
         <hr>
 
         <!--1.总发行量、name、symbol、decimals-->
-        <P><button class="getTotalSupply">getTotalSupply</button><span class="showTotalSupply"></span><br></P>
-        <p><button class="getName">getName</button><span class="showName"></span><br></p>
-        <p><button class="getSymbol">getSymbol</button><span class="showSymbol"></span><br></p>
+        <P><button class="getTotalSupply">获取奖牌的发布量</button><span class="showTotalSupply"></span><br></P>
+        <p><button class="getName">获取主办方名称</button><span class="showName"></span><br></p>
+        <p><button class="getSymbol">获取奖牌符号</button><span class="showSymbol"></span><br></p>
 
         <!--2.添加代币、部门、管理员-->
         <hr>
@@ -25,13 +26,13 @@
             <input type="text" value="" id="addPlayer" placeholder="请输入获奖学生地址"><br>
             奖牌（年份-种类）：<br>
             <input type="text" value="" id="addTokenURI" placeholder="请输入奖牌（年份-种类）"><br>
-            获奖类型：<br>
-            <input type="text" value="" id="addmatchTpye" placeholder="请输入获奖类型"><br>
+            比赛类型：<br>
+            <input type="text" value="" id="addmatchTpye" placeholder="请输入比赛类型"><br>
             学生姓名：<br>
             <input type="text" value="" id="addstudentName" placeholder="请输入学生姓名"><br>
             学生学号:<br>
             <input type="text" value="" id="addstudenNum" placeholder="请输入学生学号"><br>
-            <button onclick="addItem()">addItem</button>
+            <button onclick="addItem()">发行奖牌</button>
             <span class="showadd"></span>
             <!--逮虾户-->
         <div id="loading"><img width="10%" src="img/accelerate.gif"></div>
@@ -39,13 +40,13 @@
 
         <p>
             <input type="text" value="" id="getItem" placeholder="请输入奖牌编号">
-            <button onclick="getItem()">getItem</button>
+            <button onclick="getItem()">读取奖牌</button>
             <span class="showItem"></span>
         </p>
 
         <p>
             <input type="text" value="" id="burn" placeholder="请输入奖牌编号">
-            <button onclick="burn()">burn</button>
+            <button onclick="burn()">销毁奖牌</button>
             <span class="showburn"></span>
             <!--逮虾户-->
         <div id="loading2"><img width="10%" src="img/accelerate.gif"></div>
@@ -53,12 +54,12 @@
 
         <p>
             <input type="text" value="" id="ownerOf" placeholder="请输入奖牌编号">
-            <button onclick="ownerOf()">ownerOf</button>
+            <button onclick="ownerOf()">读取奖牌所有者</button>
             <span class="showOwnerOf"></span>
         </p><hr>
 
-        <p><button class="getEventAdd">getEventAdd</button><span class="showEventAdd"></span><hr></p>
-        <p><button class="getEventBurn">getEventBurn</button><span class="showEventBurn"></span><hr></p>
+        <p><button class="getEventAdd">获取奖牌颁发记录</button><span class="showEventAdd"></span><hr></p>
+        <p><button class="getEventBurn">获取奖牌销毁记录</button><span class="showEventBurn"></span><hr></p>
 
     </body>
     <script type="text/javascript" src="ccrMedals.js"></script>

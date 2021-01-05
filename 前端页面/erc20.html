@@ -1,0 +1,131 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>学分认证</title>
+        <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="js/web3.min.js"></script>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+
+    <body>
+        <h3>university</h3>
+        <button class="enableEthereumButton">连接以太坊账户</button>
+        <h2>当前账户: <span class="showAccount"></span></h2>
+        <h2>账户余额: <span class="ShowThisAccountBalance"></span></h2>
+        <hr>
+
+        <!--1.总发行量、name、symbol、decimals-->
+        <P><button class="getTotalSupply">获取总发行量</button><span class="showTotalSupply"></span><br></P>
+        <p><button class="getName">获取代币名字</button><span class="showName"></span><br></p>
+        <p><button class="getSymbol">获取代币符号</button><span class="showSymbol"></span><br></p>
+        <p><button class="getDecimals">获取代币位数</button><span class="showDecimals"></span><br><hr></p>
+
+        <!--2.添加代币、部门、管理员-->
+        <p>
+            <br>请输入增发的代币数:<br>
+            <input type="text" value="" id="addTotalSupply">
+            <button onclick="addTotalSupply()">增加总发行量</button>
+            <!--逮虾户-->
+        <div id="loading"><img width="10%" src="img/accelerate.gif"></div>
+        </p>
+
+
+        <p>
+            <br>请输入地址:<br>
+            <input type="text" value="" id="setDepartmentAdd">
+            <br>请输入部门名字:<br>
+            <input type="text" value="" id="setDepartmentName">
+            <br>是否为相关部门:<br>
+            <input type="text" value="" id="setDepartmentBool">
+            <button onclick="setDepartment()">设置相关部门</button>
+            <!--逮虾户-->
+        <div id="loading2"><img width="10%" src="img/accelerate.gif"></div>
+        </p>
+
+        <p>
+            <br>请输入地址:<br>
+            <input type="text" value="" id="setAdministratorsAdd">
+            <br>是否为管理员:<br>
+            <input type="text" value="" id="setAdministratorsBool">
+            <button onclick="setAdministrators()">设置管理员</button><hr>
+        <!--逮虾户-->
+        <div id="loading3"><img width="10%" src="img/accelerate.gif"></div>
+        </p>
+
+        <!--4.转账-->
+        <p>
+            <br>请输入学生地址:<br>
+            <input type="text" value="" id="recipient">
+            <br>请输入加分数值:<br>
+            <input type="text" value="" id="amount">
+            <br>请输入加分原因:<br>
+            <input type="text" value="" id="reason">
+            <button onclick="transfer()">加分</button>
+            <!--逮虾户-->
+        <div id="loading4"><img width="10%" src="img/accelerate.gif"></div>
+        </p>
+        <p>
+            <br>请输入学生地址:<br>
+            <input type="text" value="" id="BurnFrom">
+            <br>请输入扣分数值:<br>
+            <input type="text" value="" id="BurnAmount">
+            <br>请输入扣分原因:<br>
+            <input type="text" value="" id="BurnReason">
+            <button onclick="burn()">扣分</button>
+            <!--逮虾户-->
+        <div id="loading5"><img width="10%" src="img/accelerate.gif"></div>
+        </p>
+        <hr>
+        <!--5.余额、getDepartment、getAdministrators-->
+        <p>
+            <br>请输入查询地址:<br>
+            <input type="text" value="" id="getBalance">
+            <button onclick="getBalance()">查询学分</button>
+            <span class="showBalance"></span>
+        </p>
+        <p>
+            <br>请输入查询地址:<br>
+            <input type="text" value="" id="getDepartment">
+            <button onclick="getDepartment()">查询相关部门</button>
+            <span class="showDepartment"></span>
+        </p>
+        <p>
+            <br>请输入查询地址:<br>
+            <input type="text" value="" id="getAdministrators">
+            <button onclick="getAdministrators()">查询管理员</button>
+            <span class="showAdministrators"></span>
+        </p>
+        <hr>
+
+        <p><button class="getEventTansfer">查询加分记录</button><span class="showEventTansfer"></span><br><hr></p>
+        <p><button class="getEventBurn">查询扣分记录</button><span class="showEventBurn"></span><br><hr></p>
+        <p><button class="getEventAdd">查询增发代币记录</button><span class="showEventAdd"></span><hr></p>
+
+    </body>
+    <script type="text/javascript" src="erc20.js"></script>
+    <script>
+        
+    </script>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

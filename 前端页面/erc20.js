@@ -89,31 +89,6 @@ const contractABI = [
 		"type": "function"
 	},
 	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
-			}
-		],
-		"name": "Approval",
-		"type": "event"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -192,6 +167,37 @@ const contractABI = [
 		"type": "function"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "setFrom",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "setTo",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "status",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint32",
+				"name": "setTime",
+				"type": "uint32"
+			}
+		],
+		"name": "SetAdministrators",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -231,12 +237,18 @@ const contractABI = [
 			},
 			{
 				"indexed": false,
+				"internalType": "bool",
+				"name": "status",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
 				"internalType": "uint32",
 				"name": "setTime",
 				"type": "uint32"
 			}
 		],
-		"name": "SetPermissions",
+		"name": "SetDepartment",
 		"type": "event"
 	},
 	{
@@ -414,7 +426,7 @@ const contractABI = [
 		"type": "function"
 	}
 ];
-var contract = new web3.eth.Contract(contractABI, "0xC36978844B66803D7528934D4Ab63829749E251D");
+var contract = new web3.eth.Contract(contractABI, "0xA830D086E03b351311cbDA3DC9b143290bDE6e7b");
 // console.log("methods为：",contract.methods);
 
 /* 逮虾户 隐藏*/
@@ -551,7 +563,8 @@ function getBalance() {
 	console.log("查询地址为："+resAdd);
 	contract.methods.balanceOf(resAdd).call({from:accounts[0]}).then(
 		function (result) {
-			$('.showBalance').html(result)
+			console.log("学分为："+result);
+			$('.showBalance').html("学分为："+result)
 		}
 	);
 }
@@ -560,8 +573,8 @@ function getDepartment() {
 	console.log("查询地址为："+resAdd);
 	contract.methods.departments(resAdd).call({from:accounts[0]}).then(
 		function (result) {
-			console.log(result);
-			$('.showDepartment').html(result.departmentName+ " " +result.departmentTF)
+			console.log("是否为相关部门："+result.departmentTF);
+			$('.showDepartment').html("名字："+result.departmentName+ " || 是否为部门：" +result.departmentTF)
 		}
 	);
 }function getAdministrators() {
@@ -569,14 +582,11 @@ function getDepartment() {
 	console.log("查询地址为："+resAdd);
 	contract.methods.administrators(resAdd).call({from:accounts[0]}).then(
 		function (result) {
-			$('.showAdministrators').html(result)
+			console.log("是否为管理员："+result);
+			$('.showAdministrators').html("是否为管理员："+result)
 		}
 	);
 }
-
-function getEventBurn(){}
-
-function getEventTansfer(){}
 
 
 $(".getEventTansfer").click(function () {
