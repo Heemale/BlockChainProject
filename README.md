@@ -28,7 +28,9 @@
 
 [前言](https://github.com/Heemale/BlockChainProject#%E5%89%8D%E8%A8%80)
 
- [1.匹配度分析和案例](https://github.com/Heemale/BlockChainProject#1%E5%8C%B9%E9%85%8D%E5%BA%A6%E5%88%86%E6%9E%90%E5%92%8C%E6%A1%88%E4%BE%8B)
+[现有的问题](https://github.com/Heemale/BlockChainProject#%E7%8E%B0%E6%9C%89%E7%9A%84%E9%97%AE%E9%A2%98) 
+
+[1.匹配度分析和案例](https://github.com/Heemale/BlockChainProject#1%E5%8C%B9%E9%85%8D%E5%BA%A6%E5%88%86%E6%9E%90%E5%92%8C%E6%A1%88%E4%BE%8B)
 
 ​	[1.2.1区块链技术与成绩认证的匹配度分析](https://github.com/Heemale/BlockChainProject#121%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E6%88%90%E7%BB%A9%E8%AE%A4%E8%AF%81%E7%9A%84%E5%8C%B9%E9%85%8D%E5%BA%A6%E5%88%86%E6%9E%90)
 
