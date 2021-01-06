@@ -437,20 +437,6 @@ document.getElementById("loading4").style.display="none";//隐藏
 document.getElementById("loading5").style.display="none";//隐藏
 
 /*1.总供应量*/
-function addTotalSupply() {
-	let res=document.getElementById('addTotalSupply').value;
-	document.getElementById("addTotalSupply").value="";
-    console.log("add为："+res);
-	/* 逮虾户 显示 */
-	document.getElementById("loading").style.display="";
-    contract.methods.addTotalSupply(res).send({from:accounts[0]}).then(
-        function (result) {
-            console.log("add_result:",result);
-			/* 逮虾户 隐藏 */
-			document.getElementById("loading").style.display="none";//隐藏
-        }
-    );
-}
 $(".getTotalSupply").click(function () {
 	contract.methods.totalSupply().call({from:accounts[0]}).then(
 		function (result) {
@@ -480,6 +466,21 @@ $(".getDecimals").click(function () {
 	);
 });
 
+function addTotalSupply() {
+	let res=document.getElementById('addTotalSupply').value;
+	document.getElementById("addTotalSupply").value="";
+	console.log("add为："+res);
+	/* 逮虾户 显示 */
+	document.getElementById("loading").style.display="";
+	contract.methods.addTotalSupply(res).send({from:accounts[0]}).then(
+		function (result) {
+			console.log("add_result:",result);
+			$('.showaddTotalSupply').html(result.status);
+			/* 逮虾户 隐藏 */
+			document.getElementById("loading").style.display="none";//隐藏
+		}
+	);
+}
 
 /*2.添加部门*/
 function setDepartment() {
@@ -495,6 +496,7 @@ function setDepartment() {
 	contract.methods.setDepartment(resAdd,resName,resBool).send({from:accounts[0]}).then(
 		function (result) {
 			console.log("add_result:",result);
+			$('.showsetDepartment').html(result.status);
 			/* 逮虾户 隐藏 */
 			document.getElementById("loading2").style.display="none";//隐藏
 		}
@@ -512,6 +514,7 @@ function setAdministrators() {
 	contract.methods.setAdministrators(resAdd,resBool).send({from:accounts[0]}).then(
 		function (result) {
 			console.log("add_result:",result);
+			$('.showsetAdministrators').html(result.status);
 			/* 逮虾户 隐藏 */
 			document.getElementById("loading3").style.display="none";//隐藏
 		}
@@ -532,6 +535,7 @@ function transfer() {
 	contract.methods.transfer(resAdd,resAmount,resReason).send({from:accounts[0]}).then(
 		function (result) {
 			console.log("transfer_result:",result);
+			$('.showtransfer').html(result.status);
 			/* 逮虾户 隐藏 */
 			document.getElementById("loading4").style.display="none";//隐藏
 		}
@@ -551,6 +555,7 @@ function burn() {
 	contract.methods.burn(resAdd,resAmount,resReason).send({from:accounts[0]}).then(
 		function (result) {
 			console.log("burn_result:",result);
+			$('.showburn').html(result.status);
 			/* 逮虾户 隐藏 */
 			document.getElementById("loading5").style.display="none";//隐藏
 		}
@@ -674,28 +679,3 @@ $(".getEventAdd").click(function () {
 		});
 	});
 });
-
-
-function timeConverter(timestamp,num){//num:0 YYYY-MM-DD  num:1  YYYY-MM-DD hh:mm:ss // timestamp:时间戳
-	timestamp = timestamp+'';
-	timestamp = timestamp.length==10?timestamp*1000:timestamp;
-	//10位的时间戳要*1000，时间戳是ms？？
-	var date = new Date(timestamp);
-	var y = date.getFullYear();
-	var m = date.getMonth() + 1;
-	//如果月份<10前面+0，否则直接打印m本身
-	m = m < 10 ? ('0' + m) : m;
-	var d = date.getDate();
-	d = d < 10 ? ('0' + d) : d;
-	var h = date.getHours();
-	h = h < 10 ? ('0' + h) : h;
-	var minute = date.getMinutes();
-	var second = date.getSeconds();
-	minute = minute < 10 ? ('0' + minute) : minute;
-	second = second < 10 ? ('0' + second) : second;
-	if(num==0){
-		return y + '-' + m + '-' + d;
-	}else{
-		return y + '-' + m + '-' + d +' '+ h +':'+ minute +':' + second;
-	}
-}

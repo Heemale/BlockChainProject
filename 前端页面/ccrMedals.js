@@ -66,6 +66,31 @@ const contractABI = [
 		"type": "event"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint32",
+				"name": "burnTime",
+				"type": "uint32"
+			}
+		],
+		"name": "Burn",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -107,50 +132,6 @@ const contractABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "burn",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "_bool",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint32",
-				"name": "burnTime",
-				"type": "uint32"
-			}
-		],
-		"name": "Burn",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "owner",
 				"type": "address"
@@ -165,6 +146,25 @@ const contractABI = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "burn",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "_bool",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -196,6 +196,19 @@ const contractABI = [
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "host",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -375,7 +388,7 @@ const contractABI = [
 		"type": "function"
 	}
 ];
-var contract = new web3.eth.Contract(contractABI, "0x3a0C0AF8cE88738F10E73778B8319d1fffc4F28A");
+var contract = new web3.eth.Contract(contractABI, "0x589bE24aCefd58F235e49b8CEf0D5B42CF7AEAa5");
 
 
 /*1.constant*/
@@ -400,6 +413,13 @@ $(".getSymbol").click(function () {
 		}
 	);
 });
+$(".getHost").click(function () {
+	contract.methods.host().call({from:accounts[0]}).then(
+		function (result) {
+			$('.showHost').html(result)
+		}
+	);
+});
 
 /* 逮虾户 隐藏*/
 document.getElementById("loading").style.display="none";//隐藏
@@ -412,25 +432,37 @@ function addItem() {
 	let matchTpye=document.getElementById('addmatchTpye').value;
 	let studentName=document.getElementById('addstudentName').value;
 	let studenNum=document.getElementById('addstudenNum').value;
-
+	$('.showadd').html("");
 	console.log("获奖学生数据为："+player,tokenURI,matchTpye,studentName,studenNum);
-	/* 逮虾户 显示 */
-	document.getElementById("loading").style.display="";
 
-	contract.methods.addItem(player,tokenURI,matchTpye,studentName,studenNum).send({from:accounts[0]}).then(
-		function (result) {
-			console.log("add_result:",result);
-			document.getElementById("addPlayer").value="";
-			document.getElementById("addTokenURI").value="";
-			document.getElementById("addmatchTpye").value="";
-			document.getElementById("addstudentName").value="";
-			document.getElementById("addstudenNum").value="";
-			$('.showadd').html(result.status);
+	contract.methods.host().call({from:accounts[0]}).then(
+		function (result2) {
+			if (result2.toLowerCase() == accounts[0]){
+				/* 逮虾户 显示 */
+				document.getElementById("loading").style.display="";
+				contract.methods.addItem(player,tokenURI,matchTpye,studentName,studenNum).send({from:accounts[0]}).then(
+					function (result) {
+						console.log("add_result:",result);
+						document.getElementById("addPlayer").value="";
+						document.getElementById("addTokenURI").value="";
+						document.getElementById("addmatchTpye").value="";
+						document.getElementById("addstudentName").value="";
+						document.getElementById("addstudenNum").value="";
+						$('.showadd').html(result.status);
 
-			/* 逮虾户 隐藏 */
-			document.getElementById("loading").style.display="none";//隐藏
+						/* 逮虾户 隐藏 */
+						document.getElementById("loading").style.display="none";//隐藏
+					}
+				);
+
+			} else {
+				$('.showadd').html("您不是主办方，没有权限");
+			}
 		}
 	);
+
+
+
 }
 
 function getItem() {
@@ -441,7 +473,7 @@ function getItem() {
 		function (result2) {
 
 			if (result2[3] == 0){
-				$('.showItem').html("<p>"+ "令牌不存在" + "</p>")
+				$('.showItem').html("<p>"+ "奖牌不存在" + "</p>")
 			} else {
 
 	contract.methods.tokenURI(resItemId).call({from: accounts[0]}).then(
@@ -451,7 +483,7 @@ function getItem() {
 				+ "比赛种类：" +result2[0] +" "
 				+ "学生姓名：" + result2[1] +" "
 				+"学生学号：" + result2[2] +" "
-				+"时间戳：" + result2[3] + "</p>")
+				+"时间戳：" + timeConverter(result2[3],1) + "</p>")
 					});
 			}
 
@@ -459,13 +491,14 @@ function getItem() {
 }
 function burn() {
 	let resItemId = document.getElementById('burn').value;
+	$('.showburn').html("");
 	console.log("查询TokenId为：" + resItemId);
 
 	contract.methods.getItem(resItemId).call({from: accounts[0]}).then(
 		function (result2) {
 
 			if (result2[3] == 0){
-				$('.showburn').html("<p>"+ "令牌不存在" + "</p>")
+				$('.showburn').html("<p>"+ "奖牌不存在" + "</p>")
 			}
 			else{
 
@@ -485,7 +518,7 @@ function burn() {
 								}
 							);
 						} else {
-							$('.showburn').html("<p>"+ "您不是令牌所有者" + "</p>")
+							$('.showburn').html("<p>"+ "您不是奖牌所有者" + "</p>")
 						}
 
 
@@ -506,7 +539,7 @@ function ownerOf() {
 		function (result2) {
 
 			if (result2[3] == 0){
-				$('.showOwnerOf').html("<p>"+ "令牌不存在" + "</p>")
+				$('.showOwnerOf').html("<p>"+ "奖牌不存在" + "</p>")
 			} else {
 
 				contract.methods.ownerOf(resItemId).call({from: accounts[0]}).then(
@@ -544,7 +577,7 @@ $(".getEventAdd").click(function () {
 				"<p>"
 				+ "from：" + json.from.slice(0,6) + "..." + json.from.substring(38)
 				+ " to：" + json.to.slice(0,6) + "..." + json.to.substring(38)
-				+ " tokenId：" + json.tokenId
+				+ " 奖牌Id：" + json.tokenId
 				+ "  时间戳：" + timeConverter(json.addTime,1) + "</p>"
 			);
 		});
@@ -571,7 +604,7 @@ $(".getEventBurn").click(function () {
 			$('.showEventBurn').prepend(
 				"<p>"
 				+ " 操作人：" + json.from.slice(0,6) + "..." + json.from.substring(38)
-				+ " 令牌Id：" + json.tokenId
+				+ " 奖牌id：" + json.tokenId
 				+ " 销毁时间：" +timeConverter(json.burnTime,1) + "</p>"
 			);
 		});

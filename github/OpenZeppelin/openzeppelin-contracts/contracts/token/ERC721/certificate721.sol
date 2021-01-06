@@ -68,6 +68,9 @@ contract certificate721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enu
     function totalSupply() public view override returns (uint256) {
         return _tokenOwners.length();
     }
+    function host() public view override returns (address) {
+        return _host;
+    }
 
 
     /*3.查证书数量，证书所属人*/

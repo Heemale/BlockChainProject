@@ -277,6 +277,19 @@ const contractABI = [
 	},
 	{
 		"inputs": [],
+		"name": "host",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "name",
 		"outputs": [
 			{
@@ -415,7 +428,7 @@ const contractABI = [
 		"type": "function"
 	}
 ];
-var contract = new web3.eth.Contract(contractABI, "0x9e6C330e977BaB4495369325E0451625cee9Bcc7");
+var contract = new web3.eth.Contract(contractABI, "0x2189F69623f5932Bc4566E833269Bf4752a09fD5");
 
 
 /*1.constant*/
@@ -440,10 +453,18 @@ $(".getSymbol").click(function () {
 		}
 	);
 });
+$(".getHost").click(function () {
+	contract.methods.host().call({from:accounts[0]}).then(
+		function (result) {
+			$('.showHost').html(result)
+		}
+	);
+});
+
 
 /* 逮虾户 隐藏*/
-document.getElementById("loading").style.display="none";//隐藏
-document.getElementById("loading2").style.display="none";//隐藏
+document.getElementById("loading").style.display="none";
+document.getElementById("loading2").style.display="none";
 
 /*2.addItem*/
 function addItem() {
@@ -455,31 +476,37 @@ function addItem() {
 	let endTime=document.getElementById('endTime').value;
 	let academy=document.getElementById('academy').value;
 	let title=document.getElementById('title').value;
+	$('.showadd').html("");
 	console.log("学生证书数据为："+player,tokenURI,studenSex,studenBirthday,beginTime,endTime,academy,title);
-	/* 逮虾户 显示 */
-	document.getElementById("loading").style.display="";
-	$('.loading_bgm').html("<embed src='studio/_DejaVu.m4a' hidden='true' loop='loop'>");
 
-	contract.methods.addItem(player,tokenURI,studenSex,studenBirthday,beginTime,endTime,academy,title).send({from:accounts[0]}).then(
+	contract.methods.host().call({from:accounts[0]}).then(
+		function (result2) {
+			if (result2.toLowerCase() == accounts[0]){
+				document.getElementById("loading").style.display="";
 
-		function (result) {
-			console.log("add_result:",result);
-			document.getElementById("addPlayer").value="";
-			document.getElementById("addTokenURI").value="";
-			document.getElementById("studenSex").value="";
-			document.getElementById("studenBirthday").value="";
-			document.getElementById("beginTime").value="";
-			document.getElementById("endTime").value="";
-			document.getElementById("academy").value="";
-			document.getElementById("title").value="";
-			$('.showadd').html(result.status);
+				contract.methods.addItem(player,tokenURI,studenSex,studenBirthday,beginTime,endTime,academy,title).send({from:accounts[0]}).then(
+					function (result) {
+						console.log("add_result:",result);
+						document.getElementById("addPlayer").value="";
+						document.getElementById("addTokenURI").value="";
+						document.getElementById("studenSex").value="";
+						document.getElementById("studenBirthday").value="";
+						document.getElementById("beginTime").value="";
+						document.getElementById("endTime").value="";
+						document.getElementById("academy").value="";
+						document.getElementById("title").value="";
+						$('.showadd').html(result.status);
+						document.getElementById("loading").style.display="none";
+					}
+				)
 
-			/* 逮虾户 隐藏 */
-			document.getElementById("loading").style.display="none";//隐藏
-			$('.loading_bgm').html("");
+			} else {
+				$('.showadd').html("您没有权限");
+			}
 		}
+	);
 
-	)
+
 }
 
 function getItem() {
@@ -511,13 +538,14 @@ function getItem() {
 }
 function burn() {
 	let resItemId = document.getElementById('burn').value;
+	$('.showburn').html("");
 	console.log("查询TokenId为：" + resItemId);
 
 	contract.methods.getItem(resItemId).call({from: accounts[0]}).then(
 		function (result2) {
 
 			if (result2[3] == 0){
-				$('.showburn').html("<p>"+ "令牌不存在" + "</p>")
+				$('.showburn').html("<p>"+ "证书不存在" + "</p>")
 			}
 			else{
 
@@ -527,7 +555,6 @@ function burn() {
 
 							/* 逮虾户 显示 */
 							document.getElementById("loading2").style.display="";
-							$('.loading_bgm2').html("<embed src='studio/_DejaVu.m4a' hidden='true' loop='loop'>");
 
 							contract.methods.burn(resItemId).send({from: accounts[0]}).then(
 								function (result) {
@@ -535,11 +562,10 @@ function burn() {
 									$('.showburn').html(result.status);
 									/* 逮虾户 隐藏 */
 									document.getElementById("loading2").style.display="none";
-									$('.loading_bgm2').html("");
 								}
 							);
 						} else {
-							$('.showburn').html("<p>"+ "您不是令牌所有者" + "</p>")
+							$('.showburn').html("<p>"+ "您不是证书所有者" + "</p>")
 						}
 
 
@@ -560,7 +586,7 @@ function ownerOf() {
 		function (result2) {
 
 			if (result2[3] == 0){
-				$('.showOwnerOf').html("<p>"+ "令牌不存在" + "</p>")
+				$('.showOwnerOf').html("<p>"+ "证书不存在" + "</p>")
 			} else {
 
 				contract.methods.ownerOf(resItemId).call({from: accounts[0]}).then(
@@ -625,7 +651,7 @@ $(".getEventBurn").click(function () {
 			$('.showEventBurn').prepend(
 				"<p>"
 				+ " 操作人：" + json.from.slice(0,6) + "..." + json.from.substring(38)
-				+ " 令牌Id：" + json.tokenId
+				+ " 证书Id：" + json.tokenId
 				+ " 销毁时间：" +timeConverter(json.burnTime,1) + "</p>"
 			);
 		});
