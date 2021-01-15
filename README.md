@@ -4,13 +4,13 @@
 
  
 
-***基于区块链的成绩认证\***
+基于区块链的成绩认证
 
  
 
  
 
-***◎著 陈超荣\***
+◎著 陈超荣
 
  
 
@@ -26,55 +26,9 @@
 
  
 
-***江西软件职业技术大学\***
 
-目录
 
-[一、需求分析... 2](#_Toc61214363)
 
-[1.背景与现状... 2](#_Toc61214364)
-
-[2.概述... 4](#_Toc61214365)
-
-[3.区块链技术与成绩认证的应用案例... 5](#_Toc61214366)
-
-[二、区块链技术与成绩认证的匹配度分析... 7](#_Toc61214367)
-
-[三、基于区块链的成绩认证方案设计... 9](#_Toc61214368)
-
-[1.业务设计... 9](#_Toc61214369)
-
-[2.架构设计... 12](#_Toc61214370)
-
-[3.交互设计... 16](#_Toc61214371)
-
-[四、关键技术... 21](#_Toc61214372)
-
-[1.以太坊与智能合约... 21](#_Toc61214373)
-
-[2.web3js. 22](#_Toc61214374)
-
-[五、合约内容... 23](#_Toc61214375)
-
-[1.1基于区块链的毕业证书... 23](#_Toc61214376)
-
-[1.2基于区块链的学分认证... 26](#_Toc61214377)
-
-[六、前后端代码... 30](#_Toc61214378)
-
-[6.1必要的准备：... 30](#_Toc61214379)
-
-[6.2基于区块链的毕业证书：... 31](#_Toc61214380)
-
-[6.3基于区块链的学分认证：... 39](#_Toc61214381)
-
-[七、前端操作... 45](#_Toc61214382)
-
-[7.1基于区块链的毕业证书... 45](#_Toc61214383)
-
-[7.2. 基于区块链的学分认证... 46](#_Toc61214384)
-
-[八、总结和体会... 50](#_Toc61214385)
 
  
 
@@ -422,25 +376,25 @@
 
 **1.****合约部署阶段**
 
-**![img](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image016.png)**
+**![img](https://i.loli.net/2021/01/15/U2i4cymZEYeonqV.png)**
 
 高校部署合约，部署数据为学校名称和学位类型，部署完毕之后，合约保存在区块链之中，高校成为合约的所有人。只有合约的所有人才能颁发证书。
 
 **2.****证书颁发阶段**
 
-**![img](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image018.png)**
+**![img](https://i.loli.net/2021/01/15/upf74hvGNZTyEmc.png)**
 
 毕业生修完学分、完成学业达到毕业条件之后，高校根据学生信息为其颁发基于区块链的不可替代性的毕业证书，毕业生成为此证书的所有人。高校账户使用私钥签名交易，颁发证书的操作会被记录到合约中的颁发证书事件中，并且永远保存在区块链中，不可被篡改。
 
 **3.****证书查询阶段**
 
-**![img](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image020.png)**
+**![img](https://i.loli.net/2021/01/15/ab9ApqeNi5UEtMw.png)**
 
 学生或者是用人单位可以通过学生毕业证书的编号查询证书的相关信息。学生输入证书的编号，如果证书存在，合约会返回相应的证书的信息。证书的相关信息有：学生姓名、学生性别、出生日期、入学时间、毕业时间、院系名称、学位名称以及证书颁发的时间戳。
 
 **1.** **证书销毁阶段**
 
-**![img](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image022.png)**
+**![img](https://i.loli.net/2021/01/15/OGQoJgnu2kcLKyM.png)**
 
   只有毕业证书的所有人才能销毁毕业证书，学生通过毕业证书的编号获取指定证书，用私钥签署交易，对毕业证书进行销毁。此次销毁的操作会被记录到合约中的颁发证书事件中，并且永远保存在区块链中，不可被篡改。
 
@@ -450,7 +404,7 @@
 
 **1.****合约部署阶段**
 
-![部署](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image024.png)
+![部署](https://i.loli.net/2021/01/15/je4oYy9dRgwDWKT.png)
 
 高校部署合约，部署数据为代币的总发行量、代币名称和代币符号，部署完毕之后，合约保存在区块链之中，高校成为合约的所有人。
 
@@ -458,7 +412,7 @@
 
 **2.****代币增加发行阶段**
 
-![增加代币](file:///C:/Users/user/AppData/Local/Temp/msohtmlclip1/01/clip_image026.png)
+![增加代币](https://i.loli.net/2021/01/15/VEPYHu9xTZnMpUW.png)
 
 高校或是管理员根据需要进行代币的发行，输入数据为额外发行的代币数量，高校或者是管理员账户使用私钥签名交易，完成代币的发行。代币发行的操作会被记录到合约中的增发代币事件中，并且永远保存在区块链中，不可被篡改。
 
@@ -538,51 +492,57 @@ Web3.js 通过 [JSON RPC](https://en.wikipedia.org/wiki/Remote_procedure_call)�
 
 ### 1.1基于区块链的毕业证书
 
-1.学校部署毕业证书合约时会自动初始化赋值：学校的名称和学生的学位。（例如：清华大学、硕士研究生）
+1.学校部署毕业证书合约时会自动初始化赋值：学校的名称和学生的学位。（例如：清华大学、硕士研究生） 
 
-| constructor() public  certificate721("清华大学", "硕士研究生") {} |
-| ------------------------------------------------------------ |
-| constructor (string memory  name_, string memory symbol_) public {      _name = name_;      _symbol = symbol_;      _host = msg.sender;           _registerInterface(_INTERFACE_ID_ERC721);        _registerInterface(_INTERFACE_ID_ERC721_METADATA);        _registerInterface(_INTERFACE_ID_ERC721_ENUMERABLE);    } |
+```solidity
+constructor() public  certificate721("清华大学", "硕士研究生") {}  
+```
 
- 
+```solidity
+constructor (string memory  name_, string memory symbol_) public {      _name = name_;      _symbol = symbol_;      _host = msg.sender;           _registerInterface(_INTERFACE_ID_ERC721);        _registerInterface(_INTERFACE_ID_ERC721_METADATA);        _registerInterface(_INTERFACE_ID_ERC721_ENUMERABLE);    }  
+```
 
  2.将ERC721代币中唯一的TokenId和学生的信息绑定在一起，生成了唯一的毕业证书。
 
-​    struct certificate {      string _studenSex;      string _studenBirthday;      string _beginTime;      string _endTime;      string _academy;      string _title;      uint32 _timestamp;    }       mapping(uint256 =>  certificate ) public certificates;  
+```solidity
+    struct certificate {      string _studenSex;      string _studenBirthday;      string _beginTime;      string _endTime;      string _academy;      string _title;      uint32 _timestamp;    }       mapping(uint256 =>  certificate ) public certificates;  
+```
 
  
 
  3.调用totalSupply方法可以查询到这个学校颁发的证书数量。
 
-​    function totalSupply()  public view override returns (uint256) {      return  _tokenOwners.length();    }  
-
- 
+```solidity
+    function totalSupply()  public view override returns (uint256) {      return  _tokenOwners.length();    }  
+```
 
  4.调用name和symbol方法查询到学校的名字和证书的类型。
 
-​    function name() public view  override returns (string memory) {      return _name;    }    function symbol() public  view override returns (string memory) {      return _symbol;    }  
-
- 
+```solidity
+    function name() public view  override returns (string memory) {      return _name;    }    function symbol() public  view override returns (string memory) {      return _symbol;    }  
+```
 
  5.高校通过调用addItem方法来给学生颁发毕业证书，往方法里面传入的参数为学生的基本信息（如：姓名，性别，出生日期，入学时间，毕业时间，学院，学位），生成的证书会打上时间戳。调用addItem方法时会被记录在合约的事件（event）里面。
 
-​    function addItem(      address player, string  memory tokenURI,      string memory  studenSex,      string memory  studenBirthday,      string memory  beginTime,      string memory endTime,      string memory  academy,string memory title      )      public onlyHost      returns (uint256)    {      _tokenIds.increment();         uint256 newItemId =  _tokenIds.current();      _mint(player,  newItemId);      _setTokenURI(newItemId,  tokenURI);              certificates[newItemId]._studenSex = studenSex;        certificates[newItemId]._studenBirthday = studenBirthday;        certificates[newItemId]._beginTime = beginTime;        certificates[newItemId]._endTime = endTime;        certificates[newItemId]._academy = academy;        certificates[newItemId]._title = title;      certificates[newItemId]._timestamp=  uint32(block.timestamp);         return newItemId;    }  
-
- 
+```solidity
+    function addItem(      address player, string  memory tokenURI,      string memory  studenSex,      string memory  studenBirthday,      string memory  beginTime,      string memory endTime,      string memory  academy,string memory title      )      public onlyHost      returns (uint256)    {      _tokenIds.increment();         uint256 newItemId =  _tokenIds.current();      _mint(player,  newItemId);      _setTokenURI(newItemId,  tokenURI);              certificates[newItemId]._studenSex = studenSex;        certificates[newItemId]._studenBirthday = studenBirthday;        certificates[newItemId]._beginTime = beginTime;        certificates[newItemId]._endTime = endTime;        certificates[newItemId]._academy = academy;        certificates[newItemId]._title = title;      certificates[newItemId]._timestamp=  uint32(block.timestamp);         return newItemId;    }  
+```
 
  6.调用getItem方法，可以通过tokenId（即证书标号）查询到证书的详细信息。
 
-​    function getItem(uint256  _ItemId) public view returns (      string memory, string  memory,string memory,      string memory,string  memory,uint32      ) {      return (        certificates[_ItemId]._studenSex,        certificates[_ItemId]._studenBirthday,        certificates[_ItemId]._beginTime,        certificates[_ItemId]._endTime,        certificates[_ItemId]._academy,        certificates[_ItemId]._timestamp);    }  
-
- 
+```solidity
+    function getItem(uint256  _ItemId) public view returns (      string memory, string  memory,string memory,      string memory,string  memory,uint32      ) {      return (        certificates[_ItemId]._studenSex,        certificates[_ItemId]._studenBirthday,        certificates[_ItemId]._beginTime,        certificates[_ItemId]._endTime,        certificates[_ItemId]._academy,        certificates[_ItemId]._timestamp);    }  
+```
 
  7.证书的所有者可以通过burn方法来销毁自己的证书。调用burn方法时会被记录在合约的事件（event）里面。
 
-| function burn(uint256  tokenId) public returns(bool _bool) {        require(_isOwner(_msgSender(), tokenId), "ERC721: 证书只能被所有者销毁");      _burn(tokenId);        certificates[tokenId]._studenSex = "";        certificates[tokenId]._studenBirthday = "";        certificates[tokenId]._beginTime = "";      certificates[tokenId]._endTime  = "";            certificates[tokenId]._academy = "";        certificates[tokenId]._timestamp = 0;           return _bool;    } |
-| ------------------------------------------------------------ |
-| function _burn(uint256  tokenId) internal virtual {      address owner =  ownerOf(tokenId);        _beforeTokenTransfer(owner, address(0), tokenId);         if  (bytes(_tokenURIs[tokenId]).length != 0) {        delete  _tokenURIs[tokenId];      }           _holderTokens[owner].remove(tokenId);        _tokenOwners.remove(tokenId);      emit Burn(_msgSender(),  tokenId, uint32(block.timestamp));    } |
+```solidity
+    function burn(uint256  tokenId) public returns(bool _bool) {        require(_isOwner(_msgSender(), tokenId), "ERC721: 证书只能被所有者销毁");      _burn(tokenId);        certificates[tokenId]._studenSex = "";        certificates[tokenId]._studenBirthday = "";        certificates[tokenId]._beginTime = "";      certificates[tokenId]._endTime  = "";            certificates[tokenId]._academy = "";        certificates[tokenId]._timestamp = 0;           return _bool;    }  
+```
 
- 
+```solidity
+    function _burn(uint256  tokenId) internal virtual {      address owner =  ownerOf(tokenId);        _beforeTokenTransfer(owner, address(0), tokenId);         if  (bytes(_tokenURIs[tokenId]).length != 0) {        delete  _tokenURIs[tokenId];      }           _holderTokens[owner].remove(tokenId);        _tokenOwners.remove(tokenId);      emit Burn(_msgSender(),  tokenId, uint32(block.timestamp));    }  
+```
 
  8.查询数据
 
@@ -592,9 +552,9 @@ Web3.js 通过 [JSON RPC](https://en.wikipedia.org/wiki/Remote_procedure_call)�
 
 调用tokenURI方法可以通过证书编号查询到证书所有人的名字。
 
+```solidity
    function balanceOf(address  owner) public view override returns (uint256) {      require(owner !=  address(0), "ERC721: balance query for the zero address");      return  _holderTokens[owner].length();  }       function ownerOf(uint256  tokenId) public view override returns (address) {      return  _tokenOwners.get(tokenId, "ERC721: owner 查询不到证书");  }         function tokenURI(uint256 tokenId) public view override returns  (string memory) {        require(_exists(tokenId), "ERC721Metadata: URI 查询不到证书");        string memory _tokenURI = _tokenURIs[tokenId];         if  (bytes(_baseURI).length == 0) {          return _tokenURI;      }      if  (bytes(_tokenURI).length > 0) {          return string(abi.encodePacked(_baseURI, _tokenURI));      }           return string(abi.encodePacked(_baseURI, tokenId.toString()));    }  
-
- 
+```
 
  
 
@@ -672,9 +632,9 @@ Web3.js 通过 [JSON RPC](https://en.wikipedia.org/wiki/Remote_procedure_call)�
 
 1.必要文件：jquery和web3的js文件
 
-​      <script  type="text/javascript"  src="js/jquery-3.5.1.min.js"></script>      <script  type="text/javascript"  src="js/web3.min.js"></script>  
-
- 
+```js
+      <script  type="text/javascript"  src="js/jquery-3.5.1.min.js"></script>      <script  type="text/javascript"  src="js/web3.min.js"></script>  
+```
 
 2.点击按钮，连接以太坊账户。账号变更的话，前端显示的账户会变化。
 
